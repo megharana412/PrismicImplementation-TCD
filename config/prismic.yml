@@ -1,0 +1,9 @@
+---
+url: http://localhost:3000/admincms
+# If specified this token is used for all "guest" requests
+# token: ""
+# OAuth2 configuration
+# client_id: ""
+# client_secret: ""
+
+# This file can contain ERB; for instance: client_id: <%= ENV['CLIENT_ID'] %>
