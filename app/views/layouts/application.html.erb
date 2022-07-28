@@ -12,11 +12,8 @@
   </head>
 
   <body>
-    <%= yield %>
-    <div class="content">
-      <h1><%= @document['about.title'].as_text() %></h1>
-      <img src="<%= @document['about.image'].url %>" />
-      <%= @document['about.description'].as_html(nil).html_safe %>
-    </div>
+    <script>
+  window.prismic = { endpoint: '<%= endpoint %>' };
+</script>
   </body>
 </html>
