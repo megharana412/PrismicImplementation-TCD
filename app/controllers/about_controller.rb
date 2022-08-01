@@ -1,12 +1,12 @@
 class AboutController < ApplicationController
+  
   def index
     api = Prismic.api('https://tcd-project2.prismic.io/api/v1')
     
-    response = api.all({
-        "page" => params[:page] ? params[:page] : "1",
-        "page_size" => params[:page_size] ? params[:page_size] : "20",
-        "ref" => ref})
-    @documents = response.results[0]
+    response = api.query(Prismic::Predicates.at("document.type", "about"), { "pageSize" => 100 ,
+       "ref" => ref})
+    documents = response.results
+    
   end
 
   # Single-document page action: mostly, setting the @document instance variable, and checking the URL
@@ -38,6 +38,7 @@ class AboutController < ApplicationController
 
 
   # For writers to preview a draft with the real layout
+  # Preview
   def preview
     api = Prismic.api('https://tcd-project2.prismic.io/api/v1')
     preview_token = params[:token]
@@ -45,5 +46,4 @@ class AboutController < ApplicationController
     cookies[Prismic::PREVIEW_COOKIE] = { value: preview_token, expires: 30.minutes.from_now }
     redirect_to redirect_url
   end
-
 end

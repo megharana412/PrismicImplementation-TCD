@@ -1,16 +1,12 @@
 class ApplicationController < ActionController::API
   # If something goes wrong, it could be because of an invalid preview token
-  def clearcookies
-    cookies.delete Prismic::PREVIEW_COOKIE
-    redirect_to '/'
-  end
+  include PrismicService
+  include ApplicationHelper
 
   def api
     @api = Prismic.api('https://tcd-project2.prismic.io/api/v1')
   end
 
-  # Setting @ref as the actual ref id being queried, even if it's the master ref.
-  # To be used to call the API, for instance: api.form('everything').submit(ref)
   def ref
     @ref ||= preview_ref || experiment_ref || api.master_ref.ref
   end
@@ -29,13 +25,6 @@ class ApplicationController < ActionController::API
     else
       nil
     end
-  end
-
-  ##
-
-  # Easier access and initialization of the Prismic::API object.
-  def api
-    @api ||= PrismicService.init_api
   end
 
 end
