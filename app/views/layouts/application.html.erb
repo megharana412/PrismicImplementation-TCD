@@ -12,8 +12,19 @@
   </head>
 
   <body>
+
+    <header>
+      <a href="/">
+        <h1>Your prismic.io project</h1>
+      </a>
+    </header>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <% # This is required for the edit button. %>
     <script>
-  window.prismic = { endpoint: '<%= endpoint %>' };
-</script>
+      window.prismic = { endpoint: '<%= endpoint %>' };
+    </script>
+    <% # This file is required for Experiments and Previews. %>
+    <script src="//static.cdn.prismic.io/prismic.min.js"></script>
   </body>
 </html>

@@ -1,0 +1,35 @@
+<script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=tcd-project2"></script>
+<form action="/search" method="GET">
+  <input type="text" name="q" value="">
+  <input type="submit" value="Search">
+</form>
+<hr />
+<h2>
+  <%=
+    case @doc_length
+    when 0
+      "No document found"
+    when 1
+      "One document found"
+    else
+      "#{@doc_length} documents found"
+    end
+  %>
+</h2>
+
+<ul>
+  <% @documents.each do |doc| %>
+    <li>
+      <%= link_to doc.slug, link_resolver().link_to(doc) %>
+      <%#
+        We could have written document_path(id: doc.id, slug: doc.slug, ref: maybe_ref);
+        but it's better to use the link_resolver, as it allows you to maintain in one place
+        the way all the documents' URLs are supposed to be written, whatever their types.
+      %>
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<%#= paginate @documents %>
